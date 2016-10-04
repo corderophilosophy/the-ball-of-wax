@@ -1,0 +1,17 @@
+{
+  "name": "the-ball-of-wax",
+  "version": "0.0.1",
+  "description": "a simple webapp scaffold",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "js",
+    "webpack"
+  ],
+  "author": "Dr. Rich Cordero <rich@corderophilosophy.com> (https://corderophilosophy.com/)",
+  "license": "MIT"
+}
