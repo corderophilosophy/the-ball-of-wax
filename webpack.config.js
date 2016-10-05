@@ -16,8 +16,7 @@ process.env.BABEL_ENV = TARGET;
 
 const common = {
   entry: {
-    src: PATHS.src,
-    styles: PATHS.styles
+    src: PATHS.src
   },
   output: {
     path: PATHS.public,
@@ -41,7 +40,6 @@ const common = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Change This!!!',
       template: './src/index.html'
     })
   ]
