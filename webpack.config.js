@@ -7,8 +7,9 @@ const parts = require('./lib/parts');
 const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
-  src: path.join(__dirname, 'src', 'assets', 'js'),
+  src: path.join(__dirname, 'src', 'assets', 'js', 'index.js'),
   styles: path.join(__dirname, 'src', 'assets', 'css', 'main.css'),
+  images: path.join(__dirname, 'src', 'assets', 'img'),
   public: path.join(__dirname, 'public')
 };
 
@@ -29,12 +30,17 @@ const common = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel?cacheDirectory'],
-        include: PATHS.src
+        loader: 'babel',
+        query: {
+          cacheDirectory: true,
+          presets: ['es2015']
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: ['file', 'image-webpack']
+        loaders: ['file?name=[path][name].[hash].[ext]', 'image-webpack'],
+        include: PATHS.images
       }
     ]
   },
@@ -64,16 +70,16 @@ case 'build':
       'production'
     ),
     parts.minify(),
-    parts.extractCSS(PATHS.styles)
+    parts.extractCSS()
   );
   break;
 default:
   config = merge(
     common,
     {
-      devtool: 'source-map'
+      devtool: 'eval'
     },
-    parts.setupCSS(PATHS.styles),
+    parts.setupCSS(),
     parts.devServer({
       host: process.env.HOST,
       port: process.env.PORT
